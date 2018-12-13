@@ -22,6 +22,11 @@ public class UserController {
 	@ResponseBody
 	@RequestMapping(value="/regist",method= {RequestMethod.POST})
 	public int regist(UserPojo user,HttpServletResponse response) {
+		
+		user.setNickname("测试用户");
+		user.setPhonenum("123456789");
+		user.setCreateUser(0);
+		user.setUpdateDate(new Date());
 		user.setCreateDate(new Date());
 		//user.setUpdateDate(null);
 		//response.setHeader( "Access-Control-Allow-Headers","Origin, X-Requested-With, Content-Type, Accept");
