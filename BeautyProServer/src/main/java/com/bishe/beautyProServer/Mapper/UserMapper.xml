@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.bishe.beautyProServer.UserDao">
+<mapper namespace="com.bishe.beautyProServer.Dao.UserDao">
 	<resultMap type="com.bishe.beautyProServer.Pojo.UserPojo"
 		id="userResultMap">
 		<!-- 用id属性来映射主键字段 -->
@@ -17,7 +17,7 @@
 	<insert id="createUser"
 		parameterType="com.bishe.beautyProServer.Pojo.UserPojo"
 		useGeneratedKeys="true" keyProperty="id">
-		insert into user(nickname,password,email,phonenum,createdate,updateuser,updatedate)
-		values (#{nickname},#{password},#{email},#{phonenum},#{createDate},#{updateUser},#{updateDate})
+		insert into user(nickname,password,email,phonenum,createdate,updateuser,updatedate)values 
+		(#{nickname},#{password},#{email},#{phonenum},#{createDate},#{updateUser},#{updateDate})
 	</insert>
 </mapper>
