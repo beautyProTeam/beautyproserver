@@ -24,11 +24,11 @@ public class UserController {
 	public int regist(UserPojo user,HttpServletResponse response) {
 		user.setCreateDate(new Date());
 		//user.setUpdateDate(null);
-		response.setHeader( "Access-Control-Allow-Headers","Origin, X-Requested-With, Content-Type, Accept");
-		response.addHeader( "Access-Control-Allow-Origin", "*" ); //���Է��ʴ�����Դ����*Ϊ����
+		//response.setHeader( "Access-Control-Allow-Headers","Origin, X-Requested-With, Content-Type, Accept");
+		//response.setHeader( "Access-Control-Allow-Origin", "*" ); //���Է��ʴ�����Դ����*Ϊ����
 		//response.setHeader("Access-Control-Allow-Origin","http://localhost:8080");
-		response.addHeader( "Access-Control-Allow-Methods", "POST,OPTIONS,GET" ); //���Է��ʴ���Ľű���������
-		response.addHeader( "Access-Control-Max-Age", "1000" );
+		//response.setHeader( "Access-Control-Allow-Methods", "POST,OPTIONS,GET" ); //���Է��ʴ���Ľű���������
+		//response.setHeader( "Access-Control-Max-Age", "1000" );
 		return userService.addUser(user);
 	}
 }
