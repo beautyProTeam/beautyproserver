@@ -23,7 +23,7 @@ public class UserController {
 	@RequestMapping(value="/regist",method= {RequestMethod.POST})
 	public int regist(UserPojo user,HttpServletResponse response) {
 		
-		user.setNickname("测试用户");
+		user.setNickname("测试注册用户");
 		user.setPhonenum("123456789");
 		user.setCreateUser(0);
 		user.setUpdateDate(new Date());
