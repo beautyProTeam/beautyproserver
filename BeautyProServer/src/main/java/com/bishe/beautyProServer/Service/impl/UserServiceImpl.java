@@ -1,5 +1,7 @@
 package com.bishe.beautyProServer.Service.impl;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,21 @@ public class UserServiceImpl implements UserService {
 	
 	public int addUser(UserPojo user) {
 		return userDao.createUser(user);
+	}
+
+	@Override
+	public UserPojo selectUser(Map map) {
+		return userDao.selectUser(map);
+	}
+
+	@Override
+	public UserPojo selectUserByPhonenum(String phonenum, String password) {
+		return userDao.selectUserByPhonenum(phonenum, password);
+	}
+
+	@Override
+	public UserPojo selectUserByEmail(String email, String password) {
+		return userDao.selectUserByEmail(email, password);
 	}
 
 }

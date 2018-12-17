@@ -1,6 +1,7 @@
 package com.bishe.beautyProServer.Controller;
 
 import java.util.Date;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bishe.beautyProServer.Pojo.UserPojo;
@@ -28,12 +30,17 @@ public class UserController {
 		user.setCreateUser(0);
 		user.setUpdateDate(new Date());
 		user.setCreateDate(new Date());
-		//user.setUpdateDate(null);
-		//response.setHeader( "Access-Control-Allow-Headers","Origin, X-Requested-With, Content-Type, Accept");
-		//response.setHeader( "Access-Control-Allow-Origin", "*" ); //���Է��ʴ�����Դ����*Ϊ����
-		//response.setHeader("Access-Control-Allow-Origin","http://localhost:8080");
-		//response.setHeader( "Access-Control-Allow-Methods", "POST,OPTIONS,GET" ); //���Է��ʴ���Ľű���������
-		//response.setHeader( "Access-Control-Max-Age", "1000" );
 		return userService.addUser(user);
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="/login",method= {RequestMethod.POST})
+	public UserPojo login(@RequestParam Map<String,Object> map) {
+		UserPojo user = userService.selectUser(map);
+		return user;
+	}
+	/*public UserPojo login(String email,String password) {
+		UserPojo user = userService.selectUserByEmail(email, password);
+		return user;
+	}*/
 }

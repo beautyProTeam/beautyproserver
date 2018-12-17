@@ -20,4 +20,37 @@
 		insert into user(nickname,password,email,phonenum,createdate,updateuser,updatedate)values 
 		(#{nickname},#{password},#{email},#{phonenum},#{createDate},#{updateUser},#{updateDate})
 	</insert>
+	
+	<select id="selectUser" parameterType="map" resultMap="userResultMap">
+		select * from user where 1=1
+		<if test="nickname!='' and nickname!=null ">
+			and nickname=#{nickname}
+		</if>
+		<if test="password!='' and password!=null ">
+			and password=#{password}
+		</if>
+		<if test="email!='' and email!=null ">
+			and email=#{email}
+		</if>
+		<if test="phonenum!='' and phonenum!=null ">
+			and phonenum=#{phonenum}
+		</if>
+		<if test="createDate!='' and createDate!=null ">
+			and createdate=#{createDate}
+		</if>
+		<if test="updateUser!='' and updateUser!=null ">
+			and updateuser=#{updateUser}
+		</if>
+		<if test="updateDate!='' and updateDate!=null ">
+			and updatedate=#{updateDate}
+		</if>
+	</select>
+	
+	<select id="selectUserByPhonenum" resultMap="userResultMap">
+		select * from user where phonenum=#{phonenum} and password=#{password}
+	</select>
+	
+	<select id="selectUserByEmail" resultMap="userResultMap">
+		select * from user where email=#{email} and password=#{password}
+	</select>
 </mapper>
