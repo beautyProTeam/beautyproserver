@@ -15,5 +15,11 @@ public interface UserDao {
 	
 	public UserPojo selectUserByEmail(@Param("email") String email,@Param("password") String password);
 	
+	/*根据条件动态查询用户*/
 	public UserPojo selectUser(Map map);
+	
+	/*根据条件修改用户信息*/
+	public int updateUser(UserPojo user);
+	
+	
 }

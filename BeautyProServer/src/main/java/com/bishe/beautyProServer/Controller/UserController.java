@@ -3,7 +3,9 @@ package com.bishe.beautyProServer.Controller;
 import java.util.Date;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,12 +37,17 @@ public class UserController {
 	
 	@ResponseBody
 	@RequestMapping(value="/login",method= {RequestMethod.POST})
-	public UserPojo login(@RequestParam Map<String,Object> map) {
+	public UserPojo login(@RequestParam Map<String,Object> map,HttpSession session,HttpServletResponse response) {
 		UserPojo user = userService.selectUser(map);
+		if(user!=null) {
+			session.setAttribute("user", user);
+			/*Cookie cookie=new Cookie("sessionId", session.getId());
+			response.addCookie(cookie);*/
+		}
 		return user;
 	}
-	/*public UserPojo login(String email,String password) {
-		UserPojo user = userService.selectUserByEmail(email, password);
+	public UserPojo login(UserPojo user) {
+		int updateUser = userService.updateUser(user);
 		return user;
-	}*/
+	}
 }

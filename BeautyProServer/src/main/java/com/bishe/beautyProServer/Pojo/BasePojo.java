@@ -20,13 +20,13 @@ public class BasePojo {
 	private Date updateDate;
 	
 	/*更新商品的用户*/
-	private Integer updateUser;
+	private Integer updateUser=0;
 	
 	/*删除时间*/
 	private Date deleteDate;
 	
 	/*删除商品的用户*/
-	private Integer deleteUser;
+	private Integer deleteUser=0;
 	
 	/*是否删除*/
 	private boolean deleteFlag;

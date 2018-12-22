@@ -13,12 +13,14 @@
 		<result column="createdate" property="createDate"/>
 		<result column="updateuser" property="updateUser"/>
 		<result column="updatedate" property="updateDate"/>
+		<result column="deleteuser" property="deleteUser"/>
+		<result column="deletedate" property="deleteDate"/>
 	</resultMap>
 	<insert id="createUser"
 		parameterType="com.bishe.beautyProServer.Pojo.UserPojo"
 		useGeneratedKeys="true" keyProperty="id">
-		insert into user(nickname,password,email,phonenum,createdate,updateuser,updatedate)values 
-		(#{nickname},#{password},#{email},#{phonenum},#{createDate},#{updateUser},#{updateDate})
+		insert into user(nickname,password,email,phonenum,sex,createdate,updateuser,updatedate,deleteuser,deletedate)values 
+		(#{nickname},#{password},#{email},#{phonenum},#{sex},#{createDate},#{updateUser},#{updateDate},#{deleteUser},#{deleteDate})
 	</insert>
 	
 	<select id="selectUser" parameterType="map" resultMap="userResultMap">
@@ -38,11 +40,20 @@
 		<if test="createDate!='' and createDate!=null ">
 			and createdate=#{createDate}
 		</if>
-		<if test="updateUser!='' and updateUser!=null ">
+		<if test="updateUser!=0">
 			and updateuser=#{updateUser}
 		</if>
 		<if test="updateDate!='' and updateDate!=null ">
 			and updatedate=#{updateDate}
+		</if>
+		<if test="sex!=0">
+			and sex=#{sex}
+		</if>
+		<if test="deleteUser!=0">
+			and deleteuser=#{deleteUser}
+		</if>
+		<if test="deleteDate!='' and delete!=null ">
+			and deletedate=#{deleteDate}
 		</if>
 	</select>
 	
@@ -53,4 +64,41 @@
 	<select id="selectUserByEmail" resultMap="userResultMap">
 		select * from user where email=#{email} and password=#{password}
 	</select>
+	
+	<update id="updateUser" parameterType="com.bishe.beautyProServer.Pojo.UserPojo">
+		update user
+		<trim prefix="set" suffixOverrides=",">
+			<if test="email!=null and email!='' ">
+				email=#{email}
+			</if>
+			<if test="nickname!=null and nickname!='' ">
+				nickname=#{nickname}
+			</if>
+			<if test="password!=null and password!='' ">
+				password=#{password}
+			</if>
+			<if test="phonenum!=null and phonenum!='' ">
+				phonenum=#{phonenum}
+			</if>
+			<if test="createDate!=null and createDate!='' ">
+				createdate=#{createDate}
+			</if>
+			<if test="updateUser!=0">
+				updateuser=#{updateUser}
+			</if>
+			<if test="updateDate!=null and updateDate!='' ">
+				updatedate=#{updateDate}
+			</if>
+			<if test="sex!=0">
+				sex=#{sex}
+			</if>
+			<if test="deleteUser!=0">
+				and deleteuser=#{deleteUser}
+			</if>
+			<if test="deleteDate!='' and delete!=null ">
+				and deletedate=#{deleteDate}
+			</if>
+		</trim>
+		where id=#{id}
+	</update>
 </mapper>

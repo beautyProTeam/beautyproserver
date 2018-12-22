@@ -33,4 +33,9 @@ public class UserServiceImpl implements UserService {
 		return userDao.selectUserByEmail(email, password);
 	}
 
+	@Override
+	public int updateUser(UserPojo user) {
+		return userDao.updateUser(user);
+	}
+
 }

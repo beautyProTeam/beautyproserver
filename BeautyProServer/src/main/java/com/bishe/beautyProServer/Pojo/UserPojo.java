@@ -5,6 +5,7 @@ public class UserPojo extends BasePojo{
 	private String password;
 	private String email;
 	private String phonenum;
+	private Integer sex=1;
 	public String getNickname() {
 		return nickname;
 	}
@@ -28,5 +29,11 @@ public class UserPojo extends BasePojo{
 	}
 	public void setPhonenum(String phonenum) {
 		this.phonenum = phonenum;
+	}
+	public int getSex() {
+		return sex;
+	}
+	public void setSex(int sex) {
+		this.sex = sex;
 	}
 }

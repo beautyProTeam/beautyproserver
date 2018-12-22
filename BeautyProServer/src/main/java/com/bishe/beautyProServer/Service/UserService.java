@@ -11,4 +11,6 @@ public interface UserService {
 	public UserPojo selectUserByPhonenum(String phonenum,String password);
 	
 	public UserPojo selectUserByEmail(String email,String password);
+	
+	public int updateUser(UserPojo user);
 }
