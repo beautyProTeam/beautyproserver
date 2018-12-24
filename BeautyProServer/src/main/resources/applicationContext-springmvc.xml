@@ -99,4 +99,7 @@
 		<!-- 推迟文件解析 -->
 		<property name="resolveLazily" value="true" />
 	</bean>
+	
+	<!-- 引入redis配置 -->
+	<import resource="applicationContext-redis.xml" />
 </beans>
