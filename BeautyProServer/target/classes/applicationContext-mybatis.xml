@@ -74,4 +74,7 @@
 		<property name="sqlSessionFactoryBeanName"
 			value="sqlSessionFactory"></property>
 	</bean>
+	
+	<!-- 引入redis配置 -->
+	<import resource="applicationContext-redis.xml" />
 </beans>

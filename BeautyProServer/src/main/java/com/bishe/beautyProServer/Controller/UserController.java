@@ -3,6 +3,7 @@ package com.bishe.beautyProServer.Controller;
 import java.util.Date;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -23,8 +24,8 @@ import com.bishe.beautyProServer.Service.UserService;
 public class UserController {
 	@Autowired
 	private UserService userService;
-	@Autowired
-	private RedisTemplate<String, UserPojo> redisTemplate;
+	@Resource
+	private RedisTemplate<String, Object> redisTemplate;
 	
 	private String Object_key="USER";
 	
