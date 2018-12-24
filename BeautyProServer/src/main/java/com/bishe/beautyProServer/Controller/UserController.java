@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,6 +23,10 @@ import com.bishe.beautyProServer.Service.UserService;
 public class UserController {
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private RedisTemplate<String, UserPojo> redisTemplate;
+	
+	private String Object_key="USER";
 	
 	@ResponseBody
 	@RequestMapping(value="/regist",method= {RequestMethod.POST})
@@ -40,9 +45,7 @@ public class UserController {
 	public UserPojo login(@RequestParam Map<String,Object> map,HttpSession session,HttpServletResponse response) {
 		UserPojo user = userService.selectUser(map);
 		if(user!=null) {
-			session.setAttribute("user", user);
-			/*Cookie cookie=new Cookie("sessionId", session.getId());
-			response.addCookie(cookie);*/
+			redisTemplate.opsForHash().put(Object_key, user.getId(), user);
 		}
 		return user;
 	}
