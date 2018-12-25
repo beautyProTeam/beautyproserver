@@ -29,7 +29,7 @@ public class BasePojo {
 	private Integer deleteUser=0;
 	
 	/*是否删除*/
-	private boolean deleteFlag;
+	private int deleteFlag=1;//1是未删除,0是删除
 
 	public Integer getId() {
 		return id;
@@ -63,14 +63,16 @@ public class BasePojo {
 		this.deleteDate = deleteDate;
 	}
 
-	public boolean isDeleteFlag() {
+	
+	
+	public int getDeleteFlag() {
 		return deleteFlag;
 	}
 
-	public void setDeleteFlag(boolean deleteFlag) {
+	public void setDeleteFlag(int deleteFlag) {
 		this.deleteFlag = deleteFlag;
 	}
-	
+
 	public Integer getCreateUser() {
 		return createUser;
 	}
@@ -109,6 +111,7 @@ public class BasePojo {
 	
 	public void setDeleter(HttpSession session) {
 		Integer uid=(Integer) session.getAttribute("userid");
+		this.setDeleteFlag(0);
 		this.setDeleteUser(uid);
 		this.setDeleteDate(new Date());
 	}

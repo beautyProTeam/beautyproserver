@@ -25,9 +25,9 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	@Resource
-	private RedisTemplate<String, Object> redisTemplate;
+	protected RedisTemplate<String, Object> redisTemplate;
 	
-	private String Object_key="USER";
+	public static final String Object_key="USER";
 	
 	@ResponseBody
 	@RequestMapping(value="/regist",method= {RequestMethod.POST})
@@ -46,7 +46,7 @@ public class UserController {
 	public UserPojo login(@RequestParam Map<String,Object> map,HttpSession session,HttpServletResponse response) {
 		UserPojo user = userService.selectUser(map);
 		if(user!=null) {
-			redisTemplate.opsForHash().put(Object_key, user.getId(), user);
+			redisTemplate.opsForHash().put(Object_key, user.getId().toString(), user);
 		}
 		return user;
 	}

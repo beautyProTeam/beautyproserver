@@ -16,7 +16,7 @@
 
 	<!-- 1. 数据源配置 -->
 	<context:property-placeholder
-		location="classpath:db.properties" />
+		location="classpath:db.properties" ignore-unresolvable="true"/>
 
 	<!-- Druid方式配置数据源 -->
 	<bean id="dataSource"

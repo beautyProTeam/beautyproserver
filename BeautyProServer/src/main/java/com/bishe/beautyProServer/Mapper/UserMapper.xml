@@ -15,12 +15,13 @@
 		<result column="updatedate" property="updateDate"/>
 		<result column="deleteuser" property="deleteUser"/>
 		<result column="deletedate" property="deleteDate"/>
+		<result column="deleteflag" property="deleteFlag"/>
 	</resultMap>
 	<insert id="createUser"
 		parameterType="com.bishe.beautyProServer.Pojo.UserPojo"
 		useGeneratedKeys="true" keyProperty="id">
-		insert into user(nickname,password,email,phonenum,sex,createdate,updateuser,updatedate,deleteuser,deletedate)values 
-		(#{nickname},#{password},#{email},#{phonenum},#{sex},#{createDate},#{updateUser},#{updateDate},#{deleteUser},#{deleteDate})
+		insert into user(nickname,password,email,phonenum,sex,createdate,updateuser,updatedate,deleteuser,deletedate,deleteflag)values 
+		(#{nickname},#{password},#{email},#{phonenum},#{sex},#{createDate},#{updateUser},#{updateDate},#{deleteUser},#{deleteDate},#{deleteFlag})
 	</insert>
 	
 	<select id="selectUser" parameterType="map" resultMap="userResultMap">
@@ -40,17 +41,20 @@
 		<if test="createDate!='' and createDate!=null ">
 			and createdate=#{createDate}
 		</if>
-		<if test="updateUser!=0">
+		<if test="updateUser!=-1 and updateUser!=null">
 			and updateuser=#{updateUser}
 		</if>
-		<if test="updateDate!='' and updateDate!=null ">
-			and updatedate=#{updateDate}
-		</if>
-		<if test="sex!=0">
+		<if test="sex!=-1 and sex!=null">
 			and sex=#{sex}
 		</if>
-		<if test="deleteUser!=0">
+		<if test="deleteUser!=-1 and deleteUser!=null">
 			and deleteuser=#{deleteUser}
+		</if>
+		<if test="deleteFlag!=-1 and deleteFlag!=null">
+			and deleteflag=#{deleteFlag}
+		</if>
+		<if test="updateDate!=null and updateDate!='' ">
+			and updatedate=#{updateDate}
 		</if>
 		<if test="deleteDate!='' and delete!=null ">
 			and deletedate=#{deleteDate}
@@ -93,10 +97,13 @@
 				sex=#{sex}
 			</if>
 			<if test="deleteUser!=0">
-				and deleteuser=#{deleteUser}
+				deleteuser=#{deleteUser}
 			</if>
 			<if test="deleteDate!='' and delete!=null ">
-				and deletedate=#{deleteDate}
+				deletedate=#{deleteDate}
+			</if>
+			<if test="deleteFlag!=0">
+				deleteflag=#{deleteFlag}
 			</if>
 		</trim>
 		where id=#{id}
