@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -27,7 +28,7 @@ public class UserController {
 	@Resource
 	protected RedisTemplate<String, Object> redisTemplate;
 	
-	public static final String Object_key="USER";
+	public static final String OBJECT_KEY="USER";
 	
 	@ResponseBody
 	@RequestMapping(value="/regist",method= {RequestMethod.POST})
@@ -44,11 +45,18 @@ public class UserController {
 	@ResponseBody
 	@RequestMapping(value="/login",method= {RequestMethod.POST})
 	public UserPojo login(@RequestParam Map<String,Object> map,HttpSession session,HttpServletResponse response) {
-		UserPojo user = userService.selectUser(map);
-		if(user!=null) {
-			redisTemplate.opsForHash().put(Object_key, user.getId().toString(), user);
-		}
-		return user;
+		/*UserPojo u=(UserPojo) redisTemplate.opsForHash().get(Object_key, uid.toString());
+		if(u==null) {*/
+			UserPojo user = userService.selectUser(map);
+			if(user!=null) {
+				Cookie cookie=new Cookie("userid", user.getId().toString());
+				cookie.setMaxAge(1000*60*60);
+			    response.addCookie(cookie);
+				redisTemplate.opsForHash().put(OBJECT_KEY, user.getId().toString(), user);
+			}
+			return user;
+		/*}
+		return u;*/
 	}
 	public UserPojo login(UserPojo user) {
 		int updateUser = userService.updateUser(user);
