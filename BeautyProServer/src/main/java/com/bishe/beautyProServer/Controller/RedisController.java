@@ -20,7 +20,7 @@ public class RedisController {
 	@RequestMapping(value="/redis",method= {RequestMethod.GET})
 	@ResponseBody
 	public Object getRedis(String key,String cookieName,HttpServletRequest request) {
-		Object obj = null;
+		Object obj = new Object();
 		Cookie[] cookies = request.getCookies();
 		if(cookies.length>0) {
 			for (Cookie cookie : cookies) {
