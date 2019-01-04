@@ -58,8 +58,8 @@ public class UserController {
 		/*}
 		return u;*/
 	}
-	public UserPojo login(UserPojo user) {
+	public int login(UserPojo user) {
 		int updateUser = userService.updateUser(user);
-		return user;
+		return updateUser;
 	}
 }
