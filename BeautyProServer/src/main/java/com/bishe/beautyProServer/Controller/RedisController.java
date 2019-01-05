@@ -3,6 +3,8 @@ package com.bishe.beautyProServer.Controller;
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.lang.StringUtils;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,15 +26,14 @@ public class RedisController {
 		Cookie[] cookies = request.getCookies();
 		if(cookies.length>0) {
 			for (Cookie cookie : cookies) {
-				if(cookie.getName().equals("userid")&&cookie.getName().equals(cookieName)) {
-					if(cookie.getMaxAge()>0) {
+				if(cookie!=null&&StringUtils.isNotBlank(cookie.getName())) {
+					if(cookie.getName().equals("userid")&&cookie.getName().equals(cookieName)) {
 						obj=(UserPojo)redisTemplate.opsForHash().get(key, cookie.getValue());
+						break;
 					}else {
-						cookie.setMaxAge(0);
 						long clean=redisTemplate.opsForHash().delete(key, cookie.getValue());
-						obj=null;
+						/*obj=null;*/
 					}
-					break;
 				}
 			}
 		}
