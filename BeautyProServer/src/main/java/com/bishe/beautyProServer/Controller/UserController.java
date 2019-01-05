@@ -45,18 +45,16 @@ public class UserController {
 	@ResponseBody
 	@RequestMapping(value="/login",method= {RequestMethod.POST})
 	public UserPojo login(@RequestParam Map<String,Object> map,HttpSession session,HttpServletResponse response) {
-		/*UserPojo u=(UserPojo) redisTemplate.opsForHash().get(Object_key, uid.toString());
-		if(u==null) {*/
 			UserPojo user = userService.selectUser(map);
 			if(user!=null) {
 				Cookie cookie=new Cookie("userid", user.getId().toString());
+				cookie.setDomain("http://127.0.0.1:8081");
+				cookie.setPath("/");
 				cookie.setMaxAge(1000*60*60);
 			    response.addCookie(cookie);
 				redisTemplate.opsForHash().put(OBJECT_KEY, user.getId().toString(), user);
 			}
 			return user;
-		/*}
-		return u;*/
 	}
 	public int login(UserPojo user) {
 		int updateUser = userService.updateUser(user);

@@ -25,9 +25,10 @@ public class RedisController {
 		if(cookies.length>0) {
 			for (Cookie cookie : cookies) {
 				if(cookie.getName().equals("userid")&&cookie.getName().equals(cookieName)) {
-					if(cookie.getMaxAge()>-1) {
+					if(cookie.getMaxAge()>0) {
 						obj=(UserPojo)redisTemplate.opsForHash().get(key, cookie.getValue());
 					}else {
+						cookie.setMaxAge(0);
 						long clean=redisTemplate.opsForHash().delete(key, cookie.getValue());
 						obj=null;
 					}
