@@ -56,7 +56,7 @@
 		<if test="updateDate!=null and updateDate!='' ">
 			and updatedate=#{updateDate}
 		</if>
-		<if test="deleteDate!='' and delete!=null ">
+		<if test="deleteDate!='' and deleteDate!=null ">
 			and deletedate=#{deleteDate}
 		</if>
 	</select>
