@@ -12,5 +12,5 @@ public interface UserService {
 	
 	public UserPojo selectUserByEmail(String email,String password);
 	
-	public int updateUser(UserPojo user);
+	public int updateUser(Map map);
 }

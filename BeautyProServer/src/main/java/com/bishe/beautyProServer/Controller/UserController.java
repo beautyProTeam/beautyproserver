@@ -50,7 +50,7 @@ public class UserController {
 				Cookie cookie=new Cookie("userid", user.getId().toString());
 				/*cookie.setDomain("http://127.0.0.1:8081");*/
 				cookie.setPath("/");
-				cookie.setMaxAge(1000*60*60);
+				cookie.setMaxAge(60*60);
 			    response.addCookie(cookie);
 				redisTemplate.opsForHash().put(OBJECT_KEY, user.getId().toString(), user);
 			}
@@ -84,9 +84,9 @@ public class UserController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/user/update",method= {RequestMethod.PUT})
-	public int updateUser(UserPojo user) {
-		int updateUser = userService.updateUser(user);
+	@RequestMapping(value="/user/update",method= {RequestMethod.POST})
+	public int updateUser(@RequestParam Map<String,Object> map) {
+		int updateUser = userService.updateUser(map);
 		return updateUser;
 	}
 }

@@ -69,38 +69,38 @@
 		select * from user where email=#{email} and password=#{password}
 	</select>
 	
-	<update id="updateUser" parameterType="com.bishe.beautyProServer.Pojo.UserPojo">
+	<update id="updateUser" parameterType="map">
 		update user
 		<trim prefix="set" suffixOverrides=",">
 			<if test="email!=null and email!='' ">
-				email=#{email}
+				email=#{email},
 			</if>
 			<if test="nickname!=null and nickname!='' ">
-				nickname=#{nickname}
+				nickname=#{nickname},
 			</if>
 			<if test="password!=null and password!='' ">
-				password=#{password}
+				password=#{password},
 			</if>
 			<if test="phonenum!=null and phonenum!='' ">
-				phonenum=#{phonenum}
+				phonenum=#{phonenum},
 			</if>
 			<if test="createDate!=null and createDate!='' ">
-				createdate=#{createDate}
+				createdate=#{createDate},
 			</if>
 			<if test="updateUser!=0">
-				updateuser=#{updateUser}
+				updateuser=#{updateUser},
 			</if>
 			<if test="updateDate!=null and updateDate!='' ">
-				updatedate=#{updateDate}
+				updatedate=#{updateDate},
 			</if>
 			<if test="sex!=0">
-				sex=#{sex}
+				sex=#{sex},
 			</if>
 			<if test="deleteUser!=0">
-				deleteuser=#{deleteUser}
+				deleteuser=#{deleteUser},
 			</if>
 			<if test="deleteDate!='' and delete!=null ">
-				deletedate=#{deleteDate}
+				deletedate=#{deleteDate},
 			</if>
 			<if test="deleteFlag!=0">
 				deleteflag=#{deleteFlag}

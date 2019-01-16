@@ -34,8 +34,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public int updateUser(UserPojo user) {
-		return userDao.updateUser(user);
+	public int updateUser(Map map) {
+		return userDao.updateUser(map);
 	}
 
 }
