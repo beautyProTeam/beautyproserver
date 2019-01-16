@@ -87,22 +87,22 @@
 			<if test="createDate!=null and createDate!='' ">
 				createdate=#{createDate},
 			</if>
-			<if test="updateUser!=0">
+			<if test="updateUser!=-1 and updateUser!=null">
 				updateuser=#{updateUser},
 			</if>
 			<if test="updateDate!=null and updateDate!='' ">
 				updatedate=#{updateDate},
 			</if>
-			<if test="sex!=0">
+			<if test="sex!=-1 and sex!=null">
 				sex=#{sex},
 			</if>
-			<if test="deleteUser!=0">
+			<if test="deleteUser!=-1 and deleteUser!=null">
 				deleteuser=#{deleteUser},
 			</if>
 			<if test="deleteDate!='' and delete!=null ">
 				deletedate=#{deleteDate},
 			</if>
-			<if test="deleteFlag!=0">
+			<if test="deleteFlag!=-1 and deleteFlag!=null">
 				deleteflag=#{deleteFlag}
 			</if>
 		</trim>
