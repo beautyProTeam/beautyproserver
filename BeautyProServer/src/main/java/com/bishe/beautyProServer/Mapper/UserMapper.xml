@@ -99,13 +99,13 @@
 			<if test="deleteUser!=-1 and deleteUser!=null">
 				deleteuser=#{deleteUser},
 			</if>
-			<if test="deleteDate!='' and delete!=null ">
+			<if test="deleteDate!='' and deleteDate!=null ">
 				deletedate=#{deleteDate},
 			</if>
 			<if test="deleteFlag!=-1 and deleteFlag!=null">
 				deleteflag=#{deleteFlag}
 			</if>
 		</trim>
-		where id=#{id}
+		where id=#{updateUid}
 	</update>
 </mapper>
