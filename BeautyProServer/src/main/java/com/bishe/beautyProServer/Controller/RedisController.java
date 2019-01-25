@@ -22,13 +22,13 @@ public class RedisController {
 	@RequestMapping(value="/redis",method= {RequestMethod.GET})
 	@ResponseBody
 	public Object getRedis(String key,String cookieName,HttpServletRequest request) {
-		Object obj = new Object();
+		UserPojo user=new UserPojo();
 		Cookie[] cookies = request.getCookies();
-		if(cookies.length>0) {
+		if(cookies!=null) {
 			for (Cookie cookie : cookies) {
-				if(cookie!=null&&StringUtils.isNotBlank(cookie.getName())) {
+				if(StringUtils.isNotBlank(cookie.getName())) {
 					if(cookie.getName().equals("userid")&&cookie.getName().equals(cookieName)) {
-						obj=(UserPojo)redisTemplate.opsForHash().get(key, cookie.getValue());
+						user=(UserPojo)redisTemplate.opsForHash().get(key, cookie.getValue());
 						break;
 					}else {
 						long clean=redisTemplate.opsForHash().delete(key, cookie.getValue());
@@ -38,6 +38,6 @@ public class RedisController {
 			}
 		}
 		
-		return obj;
+		return user;
 	}
 }
