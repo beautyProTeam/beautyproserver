@@ -19,6 +19,9 @@
 			expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
 
+	<!-- 加载属性文件 -->
+	<context:property-placeholder location="classpath:emailValidate.properties" ignore-unresolvable="true"/>
+
 	<!--避免IE执行AJAX时，返回JSON出现下载文件 -->
 	<bean id="MappingJackson2HttpMessageConverter"
 		class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
