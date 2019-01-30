@@ -12,6 +12,7 @@ public class UserPojo extends BasePojo implements Serializable{
 	private String email;
 	private String phonenum;
 	private Integer sex=1;
+	private String validateCode;//验证码 临时变量
 	public String getNickname() {
 		return nickname;
 	}
@@ -39,7 +40,15 @@ public class UserPojo extends BasePojo implements Serializable{
 	public int getSex() {
 		return sex;
 	}
-	public void setSex(int sex) {
+	
+	public String getValidateCode() {
+		return validateCode;
+	}
+	public void setValidateCode(String validateCode) {
+		this.validateCode = validateCode;
+	}
+	public void setSex(Integer sex) {
 		this.sex = sex;
 	}
+	
 }

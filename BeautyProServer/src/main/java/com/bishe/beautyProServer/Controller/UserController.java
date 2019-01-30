@@ -32,14 +32,24 @@ public class UserController {
 	
 	@ResponseBody
 	@RequestMapping(value="/regist",method= {RequestMethod.POST})
-	public int regist(UserPojo user,HttpServletResponse response) {
-		
+	public String regist(UserPojo user,HttpSession session,HttpServletRequest request,HttpServletResponse response) {
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("application/json; charset=utf-8");
+		response.setHeader("Access-Control-Allow-Credentials","true");
+		response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
+		response.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+		response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, POST, PUT, DELETE, TRACE, OPTIONS, PATCH");
+		String validateCode = (String) session.getAttribute("emailValidateCode");
+		if(!user.getValidateCode().equals(validateCode)) {
+			return "验证码填写错误";
+		}
 		user.setNickname("测试注册用户");
 		user.setPhonenum("123456789");
 		user.setCreateUser(0);
 		user.setUpdateDate(new Date());
 		user.setCreateDate(new Date());
-		return userService.addUser(user);
+		userService.addUser(user);
+		return "注册成功";
 	}
 	
 	@ResponseBody
