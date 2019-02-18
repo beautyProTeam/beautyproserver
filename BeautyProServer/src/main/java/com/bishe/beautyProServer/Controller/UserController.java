@@ -33,8 +33,8 @@ public class UserController {
 	@ResponseBody
 	@RequestMapping(value="/regist",method= {RequestMethod.POST})
 	public String regist(UserPojo user,HttpSession session,HttpServletRequest request,HttpServletResponse response) {
-		String validateCode = (String) session.getAttribute("emailValidateCode");
-		if(!user.getValidateCode().equals(validateCode)) {
+		Integer validateCode = (Integer) session.getAttribute("emailValidateCode");
+		if(!user.getValidateCode().equals(validateCode.toString())) {
 			return "验证码填写错误";
 		}
 		user.setNickname("测试注册用户");

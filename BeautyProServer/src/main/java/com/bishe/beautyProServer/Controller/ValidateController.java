@@ -37,7 +37,6 @@ public class ValidateController {
 	 * @throws AddressException
 	 * @throws MessagingException
 	 */
-	@CrossOrigin
 	@ResponseBody
 	@RequestMapping(value="/validate/email",method= {RequestMethod.POST})
 	public String sendByEmail(String username,HttpSession httpSession,HttpServletResponse response,HttpServletRequest request){
