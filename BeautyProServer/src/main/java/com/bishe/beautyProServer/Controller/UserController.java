@@ -33,12 +33,6 @@ public class UserController {
 	@ResponseBody
 	@RequestMapping(value="/regist",method= {RequestMethod.POST})
 	public String regist(UserPojo user,HttpSession session,HttpServletRequest request,HttpServletResponse response) {
-		response.setCharacterEncoding("UTF-8");
-		response.setContentType("application/json; charset=utf-8");
-		response.setHeader("Access-Control-Allow-Credentials","true");
-		response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
-		response.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-		response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, POST, PUT, DELETE, TRACE, OPTIONS, PATCH");
 		String validateCode = (String) session.getAttribute("emailValidateCode");
 		if(!user.getValidateCode().equals(validateCode)) {
 			return "验证码填写错误";

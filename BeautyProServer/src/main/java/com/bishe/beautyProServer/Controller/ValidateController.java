@@ -9,11 +9,13 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.mail.internet.MimeMessage.RecipientType;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -35,9 +37,10 @@ public class ValidateController {
 	 * @throws AddressException
 	 * @throws MessagingException
 	 */
+	@CrossOrigin
 	@ResponseBody
 	@RequestMapping(value="/validate/email",method= {RequestMethod.POST})
-	public String sendByEmail(String username,HttpSession httpSession,HttpServletResponse response){
+	public String sendByEmail(String username,HttpSession httpSession,HttpServletResponse response,HttpServletRequest request){
 		Properties props=new Properties();
 		props.setProperty("mail.host", sendHost);
 		props.setProperty("mail.transport.protocol", protocol);
