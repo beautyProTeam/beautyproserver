@@ -59,15 +59,13 @@
 	
 	<select id="selectAreaList" parameterType="map" resultMap="areaResultMap">
 		select * from area where 1=1
-		<if test="id!=-1">
+		<if test="id!=-1 and id!=null">
 			and id=#{id}
 		</if>
 		<if test="name!='' and name!=null ">
 			and name=#{name}
 		</if>
-		<if test="pid!=null ">
 			and pid=#{pid}
-		</if>
 		<if test="areaKind!=-1 and areaKind!=null">
 			and areaKind=#{areaKind}
 		</if>
