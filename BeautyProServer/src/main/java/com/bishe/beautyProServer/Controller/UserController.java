@@ -1,6 +1,7 @@
 package com.bishe.beautyProServer.Controller;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -42,6 +43,10 @@ public class UserController {
 		user.setCreateUser(0);
 		user.setUpdateDate(new Date());
 		user.setCreateDate(new Date());
+		UserPojo u = userService.selectUserByEmail(user.getEmail(), user.getPassword());
+		if(u!=null) {
+			return "改邮箱已被注册";
+		}
 		userService.addUser(user);
 		return "注册成功";
 	}
@@ -87,6 +92,19 @@ public class UserController {
 		}
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="/user/select",method= {RequestMethod.POST})
+	public UserPojo selectUser(@RequestParam Map<String,Object> map,HttpSession session,HttpServletResponse response) {
+			UserPojo user = userService.selectUser(map);
+			/*if(user!=null) {
+				return "redirect:update";
+			}
+			return "redirect:regist";*/
+			if(user!=null) {
+				return user;
+			}
+			return new UserPojo();
+	}
 	@ResponseBody
 	@RequestMapping(value="/user/update",method= {RequestMethod.POST})
 	public int updateUser(@RequestParam Map<String,Object> map) {
