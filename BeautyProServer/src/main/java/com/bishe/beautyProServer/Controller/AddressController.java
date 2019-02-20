@@ -30,7 +30,7 @@ public class AddressController {
 	
 	@GetMapping("/address/list")
 	@ResponseBody
-	public List<AddressPojo> selectAddressList(@RequestParam Map map) {
+	public List<AddressPojo> selectAddressList(@RequestParam Map<String,Object> map) {
 		List<AddressPojo> addressList = addressService.selectAddressList(map);
 		return addressList;
 	}
