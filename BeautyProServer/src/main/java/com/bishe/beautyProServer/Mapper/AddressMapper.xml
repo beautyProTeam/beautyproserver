@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bishe.beautyProServer.Dao.AddressDao">
+	<resultMap type="com.bishe.beautyProServer.Pojo.AddressPojo"
+		id="addressResultMap">
+		<!-- 用id属性来映射主键字段 -->
+		<id property="id" column="id" />
+		<!-- 用result属性来映射非主键字段 -->
+		<result column="realname" property="realname"/>
+		<result column="telphone" property="telphone"/>
+		<result column="uid" property="uid"/>
+		<result column="address" property="address"/>
+		<result column="defaultAddress" property="defaultAddress"/>
+		<!-- <result column="updatedate" property="updateDate"/>
+		<result column="deleteuser" property="deleteUser"/>
+		<result column="deletedate" property="deleteDate"/>
+		<result column="deleteflag" property="deleteFlag"/> -->
+	</resultMap>
+	<insert id="createAddress"
+		parameterType="com.bishe.beautyProServer.Pojo.AddressPojo"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into address(realname,telphone,uid,address,defaultAddress)values 
+		(#{realname},#{telphone},#{uid},#{address},#{defaultAddress})
+	</insert>
+	
+	<select id="selectAddress" parameterType="map" resultMap="addressResultMap">
+		select * from address where 1=1
+		<if test="id!=-1 and id=!null"><!--id!=0且id1=null  -->
+			and id=#{id}
+		</if>
+		<if test="defaultAddress!=-1 and defaultAddress=!null">
+			and defaultAddress=#{defaultAddress}
+		</if>
+		<if test="realname!='' and realname!=null ">
+			and realname=#{realname}
+		</if>
+		<if test="telphone!='' and telphone!=null ">
+			and telphone=#{telphone}
+		</if>
+		<if test="address!='' and address!=null ">
+			and address=#{address}
+		</if>
+		
+		<if test="uid!=-1 and uid!=null">
+			and uid=#{uid}
+		</if>
+	</select>
+	
+	<select id="selectAddressList" parameterType="map" resultMap="addressResultMap">
+		select * from address where 1=1
+		<if test="id!=-1 and id=!null"><!--id!=0且id1=null  -->
+			and id=#{id}
+		</if>
+		<if test="defaultAddress!=-1 and defaultAddress=!null">
+			and defaultAddress=#{defaultAddress}
+		</if>
+		<if test="realname!='' and realname!=null ">
+			and realname=#{realname}
+		</if>
+		<if test="telphone!='' and telphone!=null ">
+			and telphone=#{telphone}
+		</if>
+		<if test="address!='' and address!=null ">
+			and address=#{address}
+		</if>
+		
+		<if test="uid!=-1 and uid!=null">
+			and uid=#{uid}
+		</if>
+	</select>
+	<!-- <update id="updateUser" parameterType="map">
+		update user
+		<trim prefix="set" suffixOverrides=",">
+			<if test="email!=null and email!='' ">
+				email=#{email},
+			</if>
+			<if test="nickname!=null and nickname!='' ">
+				nickname=#{nickname},
+			</if>
+			<if test="password!=null and password!='' ">
+				password=#{password},
+			</if>
+			<if test="phonenum!=null and phonenum!='' ">
+				phonenum=#{phonenum},
+			</if>
+			<if test="createDate!=null and createDate!='' ">
+				createdate=#{createDate},
+			</if>
+			<if test="updateUser!=-1 and updateUser!=null">
+				updateuser=#{updateUser},
+			</if>
+			<if test="updateDate!=null and updateDate!='' ">
+				updatedate=#{updateDate},
+			</if>
+			<if test="sex!=-1 and sex!=null">
+				sex=#{sex},
+			</if>
+			<if test="deleteUser!=-1 and deleteUser!=null">
+				deleteuser=#{deleteUser},
+			</if>
+			<if test="deleteDate!='' and deleteDate!=null ">
+				deletedate=#{deleteDate},
+			</if>
+			<if test="deleteFlag!=-1 and deleteFlag!=null">
+				deleteflag=#{deleteFlag}
+			</if>
+		</trim>
+		where id=#{updateUid}
+	</update> -->
+</mapper>
