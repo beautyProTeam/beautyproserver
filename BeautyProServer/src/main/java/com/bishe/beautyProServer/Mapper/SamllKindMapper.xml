@@ -12,8 +12,8 @@
 			<result column="kind_name" property="name"/>
 		</collection> -->
 		
-		<association property="kind" column="kind_id" >
-			<id column="kind_id" property="id"/>
+		<association property="kind" column="kind_id" javaType="com.bishe.beautyProServer.Pojo.KindPojo">
+			<result column="kind_id" property="id"/>
 			<result column="kind_name" property="name"/>
 		</association>
 	</resultMap>
