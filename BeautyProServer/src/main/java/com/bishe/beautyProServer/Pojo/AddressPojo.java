@@ -8,8 +8,8 @@ public class AddressPojo extends BasePojo implements Serializable{
 	private String realname;
 	private String telphone;
 	private String address;
-	private Integer uid;
-	private Integer defaultAddress;//是否是默认地址 1:默认
+	private Integer uid=0;
+	private Integer defaultAddress=0;//是否是默认地址 1:默认
 	public String getRealname() {
 		return realname;
 	}

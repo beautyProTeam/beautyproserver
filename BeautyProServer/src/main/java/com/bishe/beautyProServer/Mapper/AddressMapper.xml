@@ -11,10 +11,6 @@
 		<result column="uid" property="uid"/>
 		<result column="address" property="address"/>
 		<result column="defaultAddress" property="defaultAddress"/>
-		<!-- <result column="updatedate" property="updateDate"/>
-		<result column="deleteuser" property="deleteUser"/>
-		<result column="deletedate" property="deleteDate"/>
-		<result column="deleteflag" property="deleteFlag"/> -->
 	</resultMap>
 	<insert id="createAddress"
 		parameterType="com.bishe.beautyProServer.Pojo.AddressPojo"

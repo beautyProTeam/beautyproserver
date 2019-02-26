@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bishe.beautyProServer.Dao.SmallKindDao">
+	<resultMap type="com.bishe.beautyProServer.Pojo.SmallKindPojo"
+		id="SmallkindResultMap">
+		<!-- 用id属性来映射主键字段 -->
+		<id property="id" column="small_kind_id" />
+		<!-- 用result属性来映射非主键字段 -->
+		<result column="small_kind_name" property="name"/>
+		<!-- <collection property="kind" column="kind_id" fetchType="lazy" ofType="com.bishe.beautyProServer.Pojo.KindPojo">
+			<result column="kind_id" property="id"/>
+			<result column="kind_name" property="name"/>
+		</collection> -->
+		
+		<association property="kind" column="kind_id" >
+			<id column="kind_id" property="id"/>
+			<result column="kind_name" property="name"/>
+		</association>
+	</resultMap>
+	<select id="smallKindList" parameterType="map" resultMap="SmallkindResultMap">
+		select * from smallKind where 1=1 
+		<if test="id !=-1 and id!=null">
+			and small_kind_id=#{id}
+		</if>
+		<if test="name !='' and name!=null">
+			and small_kind_name=#{name}
+		</if>
+		<if test="kindId !=-1 and kindId!=null">
+			and kind_id=#{kindId}
+		</if>
+	</select>
+	<!-- <insert id="createUser"
+		parameterType="com.bishe.beautyProServer.Pojo.UserPojo"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into user(nickname,password,email,phonenum,sex,createdate,updateuser,updatedate,deleteuser,deletedate,deleteflag)values 
+		(#{nickname},#{password},#{email},#{phonenum},#{sex},#{createDate},#{updateUser},#{updateDate},#{deleteUser},#{deleteDate},#{deleteFlag})
+	</insert>
+	
+	<select id="selectUser" parameterType="map" resultMap="userResultMap">
+		select * from user where 1=1
+		<if test="nickname!='' and nickname!=null ">
+			and nickname=#{nickname}
+		</if>
+		<if test="password!='' and password!=null ">
+			and password=#{password}
+		</if>
+		<if test="email!='' and email!=null ">
+			and email=#{email}
+		</if>
+		<if test="phonenum!='' and phonenum!=null ">
+			and phonenum=#{phonenum}
+		</if>
+		<if test="createDate!='' and createDate!=null ">
+			and createdate=#{createDate}
+		</if>
+		<if test="updateUser!=-1 and updateUser!=null">
+			and updateuser=#{updateUser}
+		</if>
+		<if test="sex!=-1 and sex!=null">
+			and sex=#{sex}
+		</if>
+		<if test="deleteUser!=-1 and deleteUser!=null">
+			and deleteuser=#{deleteUser}
+		</if>
+		<if test="deleteFlag!=-1 and deleteFlag!=null">
+			and deleteflag=#{deleteFlag}
+		</if>
+		<if test="updateDate!=null and updateDate!='' ">
+			and updatedate=#{updateDate}
+		</if>
+		<if test="deleteDate!='' and deleteDate!=null ">
+			and deletedate=#{deleteDate}
+		</if>
+	</select>
+	
+	<select id="selectUserByPhonenum" resultMap="userResultMap">
+		select * from user where phonenum=#{phonenum} and password=#{password}
+	</select>
+	
+	<select id="selectUserByEmail" resultMap="userResultMap">
+		select * from user where email=#{email} and password=#{password}
+	</select>
+	
+	<update id="updateUser" parameterType="map">
+		update user
+		<trim prefix="set" suffixOverrides=",">
+			<if test="email!=null and email!='' ">
+				email=#{email},
+			</if>
+			<if test="nickname!=null and nickname!='' ">
+				nickname=#{nickname},
+			</if>
+			<if test="password!=null and password!='' ">
+				password=#{password},
+			</if>
+			<if test="phonenum!=null and phonenum!='' ">
+				phonenum=#{phonenum},
+			</if>
+			<if test="createDate!=null and createDate!='' ">
+				createdate=#{createDate},
+			</if>
+			<if test="updateUser!=-1 and updateUser!=null">
+				updateuser=#{updateUser},
+			</if>
+			<if test="updateDate!=null and updateDate!='' ">
+				updatedate=#{updateDate},
+			</if>
+			<if test="sex!=-1 and sex!=null">
+				sex=#{sex},
+			</if>
+			<if test="deleteUser!=-1 and deleteUser!=null">
+				deleteuser=#{deleteUser},
+			</if>
+			<if test="deleteDate!='' and deleteDate!=null ">
+				deletedate=#{deleteDate},
+			</if>
+			<if test="deleteFlag!=-1 and deleteFlag!=null">
+				deleteflag=#{deleteFlag}
+			</if>
+		</trim>
+		where id=#{updateUid}
+	</update> -->
+</mapper>
