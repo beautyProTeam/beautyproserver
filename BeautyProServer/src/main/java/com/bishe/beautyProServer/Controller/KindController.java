@@ -17,6 +17,8 @@ import com.bishe.beautyProServer.Pojo.SmallKindPojo;
 import com.bishe.beautyProServer.Service.KindService;
 import com.bishe.beautyProServer.Service.SmallKindService;
 
+import net.sf.json.JSONObject;
+
 @Controller
 @RequestMapping("/api/v1")
 public class KindController {
@@ -43,7 +45,8 @@ public class KindController {
 			Map resultmap=new HashMap();
 			valuemap.put("kindId",kindPojo.getId());
 			List<SmallKindPojo> smallKindList = smallKindService.smallKindList(valuemap);
-			resultmap.put(kindPojo.getId(), smallKindList);
+			/*resultmap.put(kindPojo.getId(), smallKindList);*/
+			resultmap.put(JSONObject.fromObject(kindPojo), smallKindList);
 			resultList.add(resultmap);
 		}
 		
