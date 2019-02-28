@@ -7,14 +7,11 @@
 		<id property="id" column="kind_detail_id" />
 		<!-- 用result属性来映射非主键字段 -->
 		<result column="kind_detail_name" property="detailName"/>
-		<!-- <result column="kind_id" property="kind"/>
-		<result column="small_kind_id" property="smallKind"/> -->
-		<result column="es_url" property="pic_url"/>
 		<!-- <collection property="kind" column="kind_id" fetchType="lazy" ofType="com.bishe.beautyProServer.Pojo.KindPojo">
 			<result column="kind_id" property="id"/>
 			<result column="kind_name" property="name"/>
 		</collection> -->
-		<association property="kind" column="kind_id" >
+		<association property="kind" column="kind_id" javaType="com.bishe.beautyProServer.Pojo.KindPojo">
 			<id column="kind_id" property="id"/>
 			<result column="kind_name" property="name"/>
 		</association>
@@ -26,25 +23,22 @@
 				<result column="kind_name" property="name"/>
 			</collection>
 		</collection> -->
-		<association property="smallKind" column="small_kind_id">
+		<association property="smallKind" column="small_kind_id" javaType="com.bishe.beautyProServer.Pojo.SmallKindPojo">
 			<result column="small_kind_id" property="id"/>
 			<result column="small_kind_name" property="name"/>
 			<association property="kind" column="kind_id" >
-				<id column="kind_id" property="id"/>
+				<result column="kind_id" property="id"/>
 				<result column="kind_name" property="name"/>
 			</association>
 		</association>
 	</resultMap>
 	<select id="kindDetailList" parameterType="map" resultMap="kindDetailResultMap">
-		select * from kind_detail where 1=1 
+		select kind_detail_id,kind_id,small_kind_id,kind_detail_name from kind_detail where 1=1 
 		<if test="id !=-1 and id!=null">
-			and id=#{id}
+			and kind_detail_id=#{id}
 		</if>
 		<if test="detailName !='' and detailName!=null">
 			and kind_detail_name=#{detailName}
-		</if>
-		<if test="pic_url !='' and pic_url!=null">
-			and es_url=#{pic_url}
 		</if>
 		<if test="kindId !=-1 and kindId!=null">
 			and kind_id=#{kindId}
