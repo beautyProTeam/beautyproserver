@@ -18,6 +18,7 @@
   	<param-name>contextConfigLocation</param-name>
   	<param-value>classpath:applicationContext-spring.xml</param-value>
   </context-param>
+  
   <!-- 加载转发控制器 -->
   <servlet>
   	<servlet-name>springmvc</servlet-name>
@@ -31,6 +32,12 @@
   	<servlet-name>springmvc</servlet-name>
   	<url-pattern>/</url-pattern>
   </servlet-mapping>
+  
+  
+
+  
+  
+  
   <!-- post请求的编码过滤器 -->
   <filter>
   	<filter-name>characterEncoding</filter-name>

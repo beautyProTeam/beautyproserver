@@ -59,6 +59,7 @@
 	<!-- dataSource:引用数据源，统一加载配置 -->
 	<bean id="sqlSessionFactory"
 		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:mybatis-config.xml"></property>
 		<property name="mapperLocations">
 			<array>
 				<value>classpath:com/bishe/beautyProServer/Mapper/*.xml</value>
