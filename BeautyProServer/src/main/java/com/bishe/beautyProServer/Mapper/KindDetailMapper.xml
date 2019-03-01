@@ -12,7 +12,7 @@
 			<result column="kind_name" property="name"/>
 		</collection> -->
 		<association property="kind" column="kind_id" javaType="com.bishe.beautyProServer.Pojo.KindPojo">
-			<id column="kind_id" property="id"/>
+			<result column="kind_id" property="id"/>
 			<result column="kind_name" property="name"/>
 		</association>
 		<!-- <collection property="smallKind" column="small_kind_id" fetchType="lazy" ofType="com.bishe.beautyProServer.Pojo.SmallKindPojo">
@@ -26,7 +26,7 @@
 		<association property="smallKind" column="small_kind_id" javaType="com.bishe.beautyProServer.Pojo.SmallKindPojo">
 			<result column="small_kind_id" property="id"/>
 			<result column="small_kind_name" property="name"/>
-			<association property="kind" column="kind_id" >
+			<association property="kind" column="kind_id" javaType="com.bishe.beautyProServer.Pojo.KindPojo">
 				<result column="kind_id" property="id"/>
 				<result column="kind_name" property="name"/>
 			</association>
