@@ -19,5 +19,9 @@ public class KindServiceImpl implements KindService{
 	public List<KindPojo> getKindList(Map map) {
 		return kindDao.getKindList(map);
 	}
+	@Override
+	public List<KindPojo> kinds(Integer[] kindIds) {
+		return kindDao.kinds(kindIds);
+	}
 
 }

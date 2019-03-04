@@ -3,6 +3,11 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <settings>
+        <!-- 控制台打印sql语句  -->
         <setting name="logImpl" value="STDOUT_LOGGING"/>
+        <!-- 所有映射器中配置的缓存全局开关 -->
+        <!-- <setting name="cacheEnabled" value="true"/> -->
+        <!-- 延迟加载的全局开关配置 二级缓存时将此属性关闭 -->
+        <!-- <setting name="lazyLoadingEnabled" value="true"/> -->
     </settings>
 </configuration>

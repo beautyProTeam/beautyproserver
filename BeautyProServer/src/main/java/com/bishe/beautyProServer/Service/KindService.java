@@ -7,4 +7,6 @@ import com.bishe.beautyProServer.Pojo.KindPojo;
 
 public interface KindService {
 	public List<KindPojo> getKindList(Map map);
+	
+	public List<KindPojo> kinds(Integer[] kindIds);
 }

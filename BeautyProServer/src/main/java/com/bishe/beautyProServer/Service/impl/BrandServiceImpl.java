@@ -20,4 +20,9 @@ public class BrandServiceImpl implements BrandService {
 		return brandDao.brandList(map);
 	}
 
+	@Override
+	public List<BrandPojo> brands(Integer[] brandIds) {
+		return brandDao.brands(brandIds);
+	}
+
 }

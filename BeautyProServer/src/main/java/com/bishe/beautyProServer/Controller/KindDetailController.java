@@ -25,4 +25,10 @@ public class KindDetailController {
 		List<KindDetailPojo> kindDetailList = kindDetailService.kindDetailList(map);
 		return kindDetailList;
 	}
+	
+	@RequestMapping(value="/kindDetails/ids",method= {RequestMethod.GET})
+	@ResponseBody
+	public List<KindDetailPojo> kindDetails(Integer[] kindDetailIds) {
+		return kindDetailService.kindDetails(kindDetailIds);
+	}
 }

@@ -85,4 +85,9 @@ public class KindController {
 		
 		return resultList;
 	}
+	@ResponseBody
+	@GetMapping("/kinds/ids")
+	public List<KindPojo> kinds(@RequestParam Integer[] kindIds) {
+		return kindService.kinds(kindIds);
+	}
 }

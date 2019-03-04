@@ -25,6 +25,16 @@
 			and img_url=#{imgUrl}
 		</if>
 	</select>
+	<select id="brands" resultMap="brandResultMap">
+		select * from brand where 1=1 
+		and brand_id
+		in
+		<foreach collection="brandIds" item="brand_id" separator="," open="(" close=")" index="index">
+		<if test="brand_id !=-1 and brand_id!=null">
+		 #{brand_id}
+		</if>
+		</foreach>
+	</select>
 	<!-- <insert id="createUser"
 		parameterType="com.bishe.beautyProServer.Pojo.UserPojo"
 		useGeneratedKeys="true" keyProperty="id">

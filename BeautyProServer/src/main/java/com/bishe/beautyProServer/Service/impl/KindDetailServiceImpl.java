@@ -19,4 +19,9 @@ public class KindDetailServiceImpl implements KindDetailService {
 		return kindDetailDao.kindDetailList(map);
 	}
 
+	@Override
+	public List<KindDetailPojo> kindDetails(Integer[] kindDetailIds) {
+		return kindDetailDao.kindDetails(kindDetailIds);
+	}
+
 }

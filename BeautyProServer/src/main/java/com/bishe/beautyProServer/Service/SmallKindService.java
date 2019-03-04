@@ -7,4 +7,6 @@ import com.bishe.beautyProServer.Pojo.SmallKindPojo;
 
 public interface SmallKindService {
 	public List<SmallKindPojo> smallKindList(Map map);
+	
+	public List<SmallKindPojo> smallKinds(Integer[] smallKindIds);
 }

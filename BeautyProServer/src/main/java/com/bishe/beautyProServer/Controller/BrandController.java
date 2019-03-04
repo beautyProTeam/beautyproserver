@@ -26,4 +26,10 @@ public class BrandController {
 		List<BrandPojo> brandList = brandService.brandList(map);
 		return brandList;
 	}
+	@GetMapping("/brand/ids")
+	@ResponseBody
+	public List<BrandPojo> brands(@RequestParam Integer[] brandIds) {
+		List<BrandPojo> brands = brandService.brands(brandIds);
+		return brands;
+	}
 }

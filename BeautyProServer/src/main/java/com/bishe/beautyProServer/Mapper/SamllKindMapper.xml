@@ -29,6 +29,19 @@
 			and kind_id=#{kindId}
 		</if>
 	</select>
+	
+	<select id="smallKinds" resultMap="SmallkindResultMap">
+		select * from smallKind where 1=1 
+		<if test="smallKindIds!=null">
+			and small_kind_id in
+			<foreach collection="smallKindIds" separator="," open="(" close=")" index="index" item="small_kind_id">
+				<if test="small_kind_id !=-1 and small_kind_id!=null">
+				#{small_kind_id}
+				</if>
+			</foreach>
+		</if>
+	
+	</select>
 	<!-- <insert id="createUser"
 		parameterType="com.bishe.beautyProServer.Pojo.UserPojo"
 		useGeneratedKeys="true" keyProperty="id">

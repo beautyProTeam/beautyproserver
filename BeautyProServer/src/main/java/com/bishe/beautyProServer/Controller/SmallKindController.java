@@ -29,5 +29,9 @@ public class SmallKindController {
 		List<SmallKindPojo> smallKindList = smallKindService.smallKindList(map);
 		return smallKindList;
 	}
-	
+	@GetMapping("/smallKinds/ids")
+	@ResponseBody
+	public List<SmallKindPojo> smallKinds(@RequestParam Integer[] smallKindIds) {
+		return smallKindService.smallKinds(smallKindIds);
+	}
 }

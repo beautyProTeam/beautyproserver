@@ -20,4 +20,9 @@ public class SmallKindServiceImpl implements SmallKindService{
 		return smallKindDao.smallKindList(map);
 	}
 
+	@Override
+	public List<SmallKindPojo> smallKinds(Integer[] smallKindIds) {
+		return smallKindDao.smallKinds(smallKindIds);
+	}
+
 }

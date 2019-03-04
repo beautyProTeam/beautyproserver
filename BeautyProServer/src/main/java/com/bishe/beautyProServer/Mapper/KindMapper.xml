@@ -17,6 +17,27 @@
 			and kind_name=#{name}
 		</if>
 	</select>
+	<select id="getKind" parameterType="map" resultMap="kindResultMap">
+		select * from kind where 1=1 
+		<if test="id !=-1 and id!=null">
+			and kind_id=#{id}
+		</if>
+		<if test="name !='' and name!=null">
+			and kind_name=#{name}
+		</if>
+	</select>
+	<select id="kinds" resultMap="kindResultMap">
+		select * from kind where 1=1
+		<if test="kindIds !=null">
+		 and kind_id in
+		 <foreach collection="kindIds" separator="," open="(" close=")" index="index" item="kind_id">
+		 	<if test="kind_id !=-1 and kind_id!=null">
+			#{kind_id}
+			</if>
+		  
+		 </foreach>
+		</if>
+	</select>
 	<!-- <insert id="createUser"
 		parameterType="com.bishe.beautyProServer.Pojo.UserPojo"
 		useGeneratedKeys="true" keyProperty="id">

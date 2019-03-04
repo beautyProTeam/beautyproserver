@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.bishe.beautyProServer.Dao.KindDetailDao">
-	<resultMap type="com.bishe.beautyProServer.Pojo.KindDetailPojo"
-		id="kindDetailResultMap">
+<mapper namespace="com.bishe.beautyProServer.Dao.GoodDao">
+	<resultMap type="com.bishe.beautyProServer.Pojo.GoodPojo"
+		id="goodResultMap">
 		<!-- 用id属性来映射主键字段 -->
-		<id property="id" column="kind_detail_id" />
+		<id property="id" column="id" />
 		<!-- 用result属性来映射非主键字段 -->
-		<result column="kind_detail_name" property="detailName"/>
-		<association property="kind" column="kind_id" javaType="com.bishe.beautyProServer.Pojo.KindPojo">
+		<result column="name" property="name"/>
+		<result column="enName" property="enName"/>
+		<result column="img" property="imgUrl"/>
+		<result column="price" property="price"/>
+		<result column="kind_id" property="kind_id"/>
+		<result column="small_kind_id" property="small_kind_id"/>
+		<result column="kind_detail_id" property="kind_detail_id"/>
+		<result column="brand_id" property="brand_id"/>
+		<!-- <association property="kind" column="kind_id" javaType="com.bishe.beautyProServer.Pojo.KindPojo">
 			<result column="kind_id" property="id"/>
 			<result column="kind_name" property="name"/>
 		</association>
@@ -19,34 +26,77 @@
 				<result column="kind_name" property="name"/>
 			</association>
 		</association>
+		<association property="kindDetail" column="kind_detail_id" javaType="com.bishe.beautyProServer.Pojo.KindDetailPojo">
+			<result property="id" column="kind_detail_id" />
+			用result属性来映射非主键字段
+			<result column="kind_detail_name" property="detailName"/>
+			<association property="kind" column="kind_id" javaType="com.bishe.beautyProServer.Pojo.KindPojo">
+				<result column="kind_id" property="id"/>
+				<result column="kind_name" property="name"/>
+			</association>
+			<association property="smallKind" column="small_kind_id" javaType="com.bishe.beautyProServer.Pojo.SmallKindPojo">
+				<result column="small_kind_id" property="id"/>
+				<result column="small_kind_name" property="name"/>
+				<association property="kind" column="kind_id" javaType="com.bishe.beautyProServer.Pojo.KindPojo">
+					<result column="kind_id" property="id"/>
+					<result column="kind_name" property="name"/>
+				</association>
+			</association>
+		</association>
+		<association property="brand" column="brand_id" javaType="com.bishe.beautyProServer.Pojo.BrandPojo">
+			<result property="id" column="brand_id" />
+			用result属性来映射非主键字段
+			<result column="brand_name" property="name"/>
+			<result column="english_name" property="enName"/>
+			<result column="img_url" property="imgUrl"/>
+		</association> -->
 	</resultMap>
-	<select id="kindDetailList" parameterType="map" resultMap="kindDetailResultMap">
-		select kind_detail_id,kind_id,small_kind_id,kind_detail_name from kind_detail where 1=1 
+	<select id="goodList" parameterType="map" resultMap="goodResultMap">
+		select * from good where 1=1 
 		<if test="id !=-1 and id!=null">
-			and kind_detail_id=#{id}
+			and id=#{id}
 		</if>
-		<if test="detailName !='' and detailName!=null">
-			and kind_detail_name=#{detailName}
+		<if test="name !='' and name!=null">
+			and name=#{name}
 		</if>
-		<if test="kindId !=-1 and kindId!=null">
-			and kind_id=#{kindId}
+		<if test="enName !='' and enName!=null">
+			and enName=#{enName}
 		</if>
-		<if test="smallKindId !=-1 and smallKindId!=null">
-			and small_kind_id=#{smallKindId}
+		<if test="kind_id !=-1 and kind_id!=null">
+			and kind_id=#{kind_id}
+		</if>
+		<if test="small_kind_id !=-1 and small_kind_id!=null">
+			and small_kind_id=#{small_kind_id}
+		</if>
+		<if test="kind_detail_id !=-1 and kind_detail_id!=null">
+			and kind_detail_id=#{kind_detail_id}
+		</if>
+		<if test="brand_id !=-1 and brand_id !=null">
+			and brand_id=#{brandId}
+		</if>
+		<if test="price !=-1 and price!=null">
+			and price=#{price}
+		</if>
+		<if test="imgUrl !='' and imgUrl!=null">
+			and img=#{imgUrl}
 		</if>
 	</select>
 	
-	<select id="kindDetails" resultMap="kindDetailResultMap">
-		select kind_detail_id,kind_id,small_kind_id,kind_detail_name from kind_detail where 1=1
-		<if test="kindDetailIds!=null">
-		 and kind_detail_id in
-		 <foreach collection="kindDetailIds" open="(" close=")" index="index" item="kind_detail_id" separator=",">
-		 	<if test="kind_detail_id !=-1 and kind_detail_id!=null">
-		 	#{kind_detail_id}
-		 	</if>
-		 </foreach>
+	<!-- <select id="searchByKey" resultMap="goodResultMap">
+		select * from good g,kind k,smallKind sk,kind_detail kd,brand b
+		where 1=1 
+		<if test="key !='' and key !=null">
+			and
+			g.name like '%'#{key}'%' or
+			k.kind_name like '%'#{key}'%' or
+			sk.small_kind_name like '%'#{key}'%' or
+			kd.kind_detail_name like '%'#{key}'%' or
+			b.brand_name like '%'#{key}'%' or
+			b.english_name like '%'#{key}'%'
 		</if>
-	</select>
+		
+		
+	</select> -->
 	<!-- <insert id="createUser"
 		parameterType="com.bishe.beautyProServer.Pojo.UserPojo"
 		useGeneratedKeys="true" keyProperty="id">
