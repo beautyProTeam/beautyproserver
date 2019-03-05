@@ -51,8 +51,42 @@
 			<result column="img_url" property="imgUrl"/>
 		</association> -->
 	</resultMap>
-	<select id="goodList" parameterType="map" resultMap="goodResultMap">
+	<select id="goodList" resultMap="goodResultMap">
 		select * from good where 1=1 
+		<if test="id !=0 and id!=null">
+			and id=#{id}
+		</if>
+		<if test="name !='' and name!=null">
+			and name=#{name}
+		</if>
+		<if test="enName !='' and enName!=null">
+			and enName=#{enName}
+		</if>
+		<if test="kind_id !=0 and kind_id!=null">
+			and kind_id=#{kind_id}
+		</if>
+		<if test="small_kind_id !=0 and small_kind_id!=null">
+			and small_kind_id=#{small_kind_id}
+		</if>
+		<if test="kind_detail_id !=0 and kind_detail_id!=null">
+			and kind_detail_id=#{kind_detail_id}
+		</if>
+		<if test="brand_id !=0 and brand_id !=null">
+			and brand_id=#{brand_id}
+		</if>
+		<if test="price !=0 and price!=null">
+			and price=#{price}
+		</if>
+		<if test="imgUrl !='' and imgUrl!=null">
+			and img=#{imgUrl}
+		</if>
+		
+			limit #{offset},#{limit}
+		
+	</select>
+	
+	<select id="countGoods" resultType="long">
+		select count(*) from good  where 1=1 
 		<if test="id !=-1 and id!=null">
 			and id=#{id}
 		</if>

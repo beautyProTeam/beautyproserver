@@ -1,5 +1,6 @@
 package com.bishe.beautyProServer.Controller;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -12,6 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bishe.beautyProServer.Pojo.BrandPojo;
 import com.bishe.beautyProServer.Service.BrandService;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 @Controller
 @RequestMapping("/api/v1")
@@ -26,9 +30,9 @@ public class BrandController {
 		List<BrandPojo> brandList = brandService.brandList(map);
 		return brandList;
 	}
-	@GetMapping("/brand/ids")
+	@GetMapping("/brands/ids")
 	@ResponseBody
-	public List<BrandPojo> brands(@RequestParam Integer[] brandIds) {
+	public List<BrandPojo> brands(Integer[] brandIds) {
 		List<BrandPojo> brands = brandService.brands(brandIds);
 		return brands;
 	}

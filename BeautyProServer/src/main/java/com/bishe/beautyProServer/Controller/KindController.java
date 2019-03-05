@@ -87,7 +87,7 @@ public class KindController {
 	}
 	@ResponseBody
 	@GetMapping("/kinds/ids")
-	public List<KindPojo> kinds(@RequestParam Integer[] kindIds) {
+	public List<KindPojo> kinds(Integer[] kindIds) {
 		return kindService.kinds(kindIds);
 	}
 }

@@ -1,5 +1,6 @@
 package com.bishe.beautyProServer.Controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,8 +22,30 @@ public class GoodController {
 		private GoodService goodService;
 		@GetMapping("/good")
 		@ResponseBody
-		public List<GoodPojo> goods(@RequestParam Map map){
-			List<GoodPojo> goodList = goodService.goodList(map);
-			return goodList;
+		public Map<String,Object> goods(@RequestParam(required=false) Map map,@RequestParam(value="id",required=false,defaultValue="0") Integer id ,
+				@RequestParam(value="name",required=false) String name,@RequestParam(value="enName",required=false) String enName,
+				@RequestParam(value="offset",required=false,defaultValue="0") int offset,
+				@RequestParam(value="kind_id",required=false,defaultValue="0") Integer kind_id,
+				@RequestParam(value="small_kind_id",required=false,defaultValue="0") Integer small_kind_id,
+				@RequestParam(value="kind_detail_id",required=false,defaultValue="0") Integer kind_detail_id,
+				@RequestParam(value="brand_id",required=false,defaultValue="0") Integer brand_id,
+				@RequestParam(value="price",required=false,defaultValue="0") double price,
+				@RequestParam(value="imgUrl",required=false) String imgUrl,
+				@RequestParam(value="limit",required=false,defaultValue="10") int limit){
+			long countGoods = goodService.countGoods(map);
+			/*if(!map.containsKey("offset")) {
+				map.put("offset", 0);
+			}
+			if(!map.containsKey("limit")) {
+				map.put("limit", 10);
+			}*/
+			long page = (countGoods % 10 == 0)? countGoods/10 : countGoods/10+1; 
+			List<GoodPojo> goodList = goodService.goodList(id,name,enName,kind_id,small_kind_id,kind_detail_id,brand_id,price,imgUrl,offset,limit);
+			/*int currentPage = offset / limit +1;*/
+			Map map1=new HashMap();
+			map1.put("totalPage", page);
+			map1.put("rows", goodList);
+			return map1;
 		}
+		
 }

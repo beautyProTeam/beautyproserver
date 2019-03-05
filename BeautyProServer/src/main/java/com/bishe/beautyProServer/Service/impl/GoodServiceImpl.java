@@ -15,9 +15,13 @@ public class GoodServiceImpl implements GoodService {
 	@Autowired
 	private GoodDao goodDao;
 	@Override
-	public List<GoodPojo> goodList(Map map) {
-		List<GoodPojo> goodList = goodDao.goodList(map);
+	public List<GoodPojo> goodList(Integer id,String name,String enName,Integer kind_id,Integer small_kind_id,Integer kind_detail_id,Integer brand_id,double price,String imgUrl,int offset,int limit) {
+		List<GoodPojo> goodList = goodDao.goodList(id,name,enName,kind_id,small_kind_id,kind_detail_id,brand_id,price,imgUrl,offset,limit);
 		return goodList;
+	}
+	@Override
+	public long countGoods(Map map) {
+		return goodDao.countGoods(map);
 	}
 
 }

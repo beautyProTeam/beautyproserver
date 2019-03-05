@@ -31,7 +31,7 @@ public class SmallKindController {
 	}
 	@GetMapping("/smallKinds/ids")
 	@ResponseBody
-	public List<SmallKindPojo> smallKinds(@RequestParam Integer[] smallKindIds) {
+	public List<SmallKindPojo> smallKinds(Integer[] smallKindIds) {
 		return smallKindService.smallKinds(smallKindIds);
 	}
 }
