@@ -33,18 +33,13 @@ public class GoodController {
 				@RequestParam(value="imgUrl",required=false) String imgUrl,
 				@RequestParam(value="limit",required=false,defaultValue="10") int limit){
 			long countGoods = goodService.countGoods(map);
-			/*if(!map.containsKey("offset")) {
-				map.put("offset", 0);
-			}
-			if(!map.containsKey("limit")) {
-				map.put("limit", 10);
-			}*/
 			long page = (countGoods % 10 == 0)? countGoods/10 : countGoods/10+1; 
 			List<GoodPojo> goodList = goodService.goodList(id,name,enName,kind_id,small_kind_id,kind_detail_id,brand_id,price,imgUrl,offset,limit);
-			/*int currentPage = offset / limit +1;*/
+			int currentPage = offset / limit +1;
 			Map map1=new HashMap();
 			map1.put("totalPage", page);
 			map1.put("rows", goodList);
+			map1.put("currentPage", currentPage);
 			return map1;
 		}
 		

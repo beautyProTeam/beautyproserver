@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bishe.beautyProServer.Dao.GoodInfoDao">
+	<resultMap type="com.bishe.beautyProServer.Pojo.GoodInfoPojo"
+		id="goodInfoResultMap">
+		<!-- 用id属性来映射主键字段 -->
+		<id property="id" column="id" />
+		<id property="goodId" column="goodId" />
+		<!-- 用result属性来映射非主键字段 -->
+		<result column="name" property="name"/>
+		<result column="enName" property="enName"/>
+		<result column="subName" property="subName"/>
+		<result column="img" property="imgUrl"/>
+		<result column="price" property="price"/>
+		<result column="guige" property="guige"/>
+		<result column="huohao" property="huohao"/>
+		<result column="productAddress" property="productAddress"/>
+		<result column="mainContain" property="mainContain"/>
+		<result column="effect" property="effect"/>
+		<result column="desktopHtml" property="desktopHtml"/>
+	</resultMap>
+	<select id="getGoodInfo" resultMap="goodInfoResultMap" parameterType="map">
+		select * from goodinfo where 1=1 
+		<if test="id !=0 and id!=null">
+			and id=#{id}
+		</if>
+		<if test="goodId !=0 and goodId!=null">
+			and goodId=#{goodId}
+		</if>
+		<if test="name !='' and name!=null">
+			and name=#{name}
+		</if>
+		<if test="enName !='' and enName!=null">
+			and enName=#{enName}
+		</if>
+		<if test="subName !='' and subName!=null">
+			and subName=#{subName}
+		</if>
+		<if test="guige !='' and guige!=null">
+			and guige=#{guige}
+		</if>
+		<if test="huohao !='' and huohao!=null">
+			and huohao=#{huohao}
+		</if>
+		
+		<if test="productAddress !='' and productAddress !=null">
+			and productAddress=#{productAddress}
+		</if>
+		<if test="mainContain !='' and mainContain !=null">
+			and mainContain=#{mainContain}
+		</if>
+		
+		<if test="effect !='' and effect !=null">
+			and effect=#{effect}
+		</if>
+		<if test="desktopHtml !='' and desktopHtml !=null">
+			and desktopHtml=#{desktopHtml}
+		</if>
+		<if test="price !=0 and price!=null">
+			and price=#{price}
+		</if>
+		<if test="imgUrl !='' and imgUrl!=null">
+			and img=#{imgUrl}
+		</if>
+		
+	</select>
+	
+	<!-- <select id="countGoods" resultType="long">
+		select count(*) from good  where 1=1 
+		<if test="id !=-1 and id!=null">
+			and id=#{id}
+		</if>
+		<if test="name !='' and name!=null">
+			and name=#{name}
+		</if>
+		<if test="enName !='' and enName!=null">
+			and enName=#{enName}
+		</if>
+		<if test="kind_id !=-1 and kind_id!=null">
+			and kind_id=#{kind_id}
+		</if>
+		<if test="small_kind_id !=-1 and small_kind_id!=null">
+			and small_kind_id=#{small_kind_id}
+		</if>
+		<if test="kind_detail_id !=-1 and kind_detail_id!=null">
+			and kind_detail_id=#{kind_detail_id}
+		</if>
+		<if test="brand_id !=-1 and brand_id !=null">
+			and brand_id=#{brandId}
+		</if>
+		<if test="price !=-1 and price!=null">
+			and price=#{price}
+		</if>
+		<if test="imgUrl !='' and imgUrl!=null">
+			and img=#{imgUrl}
+		</if>
+	</select> -->
+	
+	<!-- <select id="searchByKey" resultMap="goodResultMap">
+		select * from good g,kind k,smallKind sk,kind_detail kd,brand b
+		where 1=1 
+		<if test="key !='' and key !=null">
+			and
+			g.name like '%'#{key}'%' or
+			k.kind_name like '%'#{key}'%' or
+			sk.small_kind_name like '%'#{key}'%' or
+			kd.kind_detail_name like '%'#{key}'%' or
+			b.brand_name like '%'#{key}'%' or
+			b.english_name like '%'#{key}'%'
+		</if>
+		
+		
+	</select> -->
+	<!-- <insert id="createUser"
+		parameterType="com.bishe.beautyProServer.Pojo.UserPojo"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into user(nickname,password,email,phonenum,sex,createdate,updateuser,updatedate,deleteuser,deletedate,deleteflag)values 
+		(#{nickname},#{password},#{email},#{phonenum},#{sex},#{createDate},#{updateUser},#{updateDate},#{deleteUser},#{deleteDate},#{deleteFlag})
+	</insert>
+	
+	<select id="selectUser" parameterType="map" resultMap="userResultMap">
+		select * from user where 1=1
+		<if test="nickname!='' and nickname!=null ">
+			and nickname=#{nickname}
+		</if>
+		<if test="password!='' and password!=null ">
+			and password=#{password}
+		</if>
+		<if test="email!='' and email!=null ">
+			and email=#{email}
+		</if>
+		<if test="phonenum!='' and phonenum!=null ">
+			and phonenum=#{phonenum}
+		</if>
+		<if test="createDate!='' and createDate!=null ">
+			and createdate=#{createDate}
+		</if>
+		<if test="updateUser!=-1 and updateUser!=null">
+			and updateuser=#{updateUser}
+		</if>
+		<if test="sex!=-1 and sex!=null">
+			and sex=#{sex}
+		</if>
+		<if test="deleteUser!=-1 and deleteUser!=null">
+			and deleteuser=#{deleteUser}
+		</if>
+		<if test="deleteFlag!=-1 and deleteFlag!=null">
+			and deleteflag=#{deleteFlag}
+		</if>
+		<if test="updateDate!=null and updateDate!='' ">
+			and updatedate=#{updateDate}
+		</if>
+		<if test="deleteDate!='' and deleteDate!=null ">
+			and deletedate=#{deleteDate}
+		</if>
+	</select>
+	
+	<select id="selectUserByPhonenum" resultMap="userResultMap">
+		select * from user where phonenum=#{phonenum} and password=#{password}
+	</select>
+	
+	<select id="selectUserByEmail" resultMap="userResultMap">
+		select * from user where email=#{email} and password=#{password}
+	</select>
+	
+	<update id="updateUser" parameterType="map">
+		update user
+		<trim prefix="set" suffixOverrides=",">
+			<if test="email!=null and email!='' ">
+				email=#{email},
+			</if>
+			<if test="nickname!=null and nickname!='' ">
+				nickname=#{nickname},
+			</if>
+			<if test="password!=null and password!='' ">
+				password=#{password},
+			</if>
+			<if test="phonenum!=null and phonenum!='' ">
+				phonenum=#{phonenum},
+			</if>
+			<if test="createDate!=null and createDate!='' ">
+				createdate=#{createDate},
+			</if>
+			<if test="updateUser!=-1 and updateUser!=null">
+				updateuser=#{updateUser},
+			</if>
+			<if test="updateDate!=null and updateDate!='' ">
+				updatedate=#{updateDate},
+			</if>
+			<if test="sex!=-1 and sex!=null">
+				sex=#{sex},
+			</if>
+			<if test="deleteUser!=-1 and deleteUser!=null">
+				deleteuser=#{deleteUser},
+			</if>
+			<if test="deleteDate!='' and deleteDate!=null ">
+				deletedate=#{deleteDate},
+			</if>
+			<if test="deleteFlag!=-1 and deleteFlag!=null">
+				deleteflag=#{deleteFlag}
+			</if>
+		</trim>
+		where id=#{updateUid}
+	</update> -->
+</mapper>
