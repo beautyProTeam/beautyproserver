@@ -64,7 +64,7 @@ public class RedisController {
 	 */
 	@RequestMapping(value="/redis/goodsInCart",method= {RequestMethod.POST})
 	@ResponseBody
-	public void save(String key,List goodsinfosAfter) {
+	public void save(String key,Object goodsinfosAfter) {
 		Set<Object> hashkeys = redisTemplate.opsForHash().keys(key);
 		Iterator<Object> iterator = hashkeys.iterator();
 		while(iterator.hasNext()) {
