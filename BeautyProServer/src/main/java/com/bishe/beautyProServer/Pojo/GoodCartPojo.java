@@ -1,6 +1,8 @@
 package com.bishe.beautyProServer.Pojo;
 
-public class GoodCartPojo{
+import java.io.Serializable;
+
+public class GoodCartPojo implements Serializable{
 	private Integer cartCount;
 	private GoodPojo good;
 
