@@ -19,4 +19,6 @@ public interface GoodDao {
 	public long countGoods(Map map); 
 	
 	public List<GoodPojo> searchByKey(String key);//根据关键字查询
+	
+	public List<GoodPojo> goods(Map map); 
 }

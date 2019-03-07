@@ -14,42 +14,7 @@
 		<result column="small_kind_id" property="small_kind_id"/>
 		<result column="kind_detail_id" property="kind_detail_id"/>
 		<result column="brand_id" property="brand_id"/>
-		<!-- <association property="kind" column="kind_id" javaType="com.bishe.beautyProServer.Pojo.KindPojo">
-			<result column="kind_id" property="id"/>
-			<result column="kind_name" property="name"/>
-		</association>
-		<association property="smallKind" column="small_kind_id" javaType="com.bishe.beautyProServer.Pojo.SmallKindPojo">
-			<result column="small_kind_id" property="id"/>
-			<result column="small_kind_name" property="name"/>
-			<association property="kind" column="kind_id" javaType="com.bishe.beautyProServer.Pojo.KindPojo">
-				<result column="kind_id" property="id"/>
-				<result column="kind_name" property="name"/>
-			</association>
-		</association>
-		<association property="kindDetail" column="kind_detail_id" javaType="com.bishe.beautyProServer.Pojo.KindDetailPojo">
-			<result property="id" column="kind_detail_id" />
-			用result属性来映射非主键字段
-			<result column="kind_detail_name" property="detailName"/>
-			<association property="kind" column="kind_id" javaType="com.bishe.beautyProServer.Pojo.KindPojo">
-				<result column="kind_id" property="id"/>
-				<result column="kind_name" property="name"/>
-			</association>
-			<association property="smallKind" column="small_kind_id" javaType="com.bishe.beautyProServer.Pojo.SmallKindPojo">
-				<result column="small_kind_id" property="id"/>
-				<result column="small_kind_name" property="name"/>
-				<association property="kind" column="kind_id" javaType="com.bishe.beautyProServer.Pojo.KindPojo">
-					<result column="kind_id" property="id"/>
-					<result column="kind_name" property="name"/>
-				</association>
-			</association>
-		</association>
-		<association property="brand" column="brand_id" javaType="com.bishe.beautyProServer.Pojo.BrandPojo">
-			<result property="id" column="brand_id" />
-			用result属性来映射非主键字段
-			<result column="brand_name" property="name"/>
-			<result column="english_name" property="enName"/>
-			<result column="img_url" property="imgUrl"/>
-		</association> -->
+		
 	</resultMap>
 	<select id="goodList" resultMap="goodResultMap">
 		select * from good where 1=1 
@@ -84,7 +49,36 @@
 			limit #{offset},#{limit}
 		
 	</select>
-	
+	<select id="goods" resultMap="goodResultMap" parameterType="map">
+		select * from good where 1=1 
+		<if test="id !=0 and id!=null">
+			and id=#{id}
+		</if>
+		<if test="name !='' and name!=null">
+			and name=#{name}
+		</if>
+		<if test="enName !='' and enName!=null">
+			and enName=#{enName}
+		</if>
+		<if test="kind_id !=0 and kind_id!=null">
+			and kind_id=#{kind_id}
+		</if>
+		<if test="small_kind_id !=0 and small_kind_id!=null">
+			and small_kind_id=#{small_kind_id}
+		</if>
+		<if test="kind_detail_id !=0 and kind_detail_id!=null">
+			and kind_detail_id=#{kind_detail_id}
+		</if>
+		<if test="brand_id !=0 and brand_id !=null">
+			and brand_id=#{brand_id}
+		</if>
+		<if test="price !=0 and price!=null">
+			and price=#{price}
+		</if>
+		<if test="imgUrl !='' and imgUrl!=null">
+			and img=#{imgUrl}
+		</if>
+	</select>
 	<select id="countGoods" resultType="long">
 		select count(*) from good  where 1=1 
 		<if test="id !=-1 and id!=null">

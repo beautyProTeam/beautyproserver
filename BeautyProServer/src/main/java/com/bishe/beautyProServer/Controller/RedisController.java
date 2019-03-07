@@ -1,5 +1,6 @@
 package com.bishe.beautyProServer.Controller;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +19,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bishe.beautyProServer.Pojo.GoodCartPojo;
 import com.bishe.beautyProServer.Pojo.UserPojo;
+
+import net.sf.json.JSONObject;
 
 @Controller
 @RequestMapping("/api/v1")
@@ -64,15 +68,28 @@ public class RedisController {
 	 */
 	@RequestMapping(value="/redis/goodsInCart",method= {RequestMethod.POST})
 	@ResponseBody
-	public void save(String key,Object goodsinfosAfter) {
-		Set<Object> hashkeys = redisTemplate.opsForHash().keys(key);
-		Iterator<Object> iterator = hashkeys.iterator();
-		while(iterator.hasNext()) {
-			String hashkey=(String)iterator.next();
-			redisTemplate.expire(hashkey, -1, TimeUnit.SECONDS);
-			break;
+	public int save(String key,GoodCartPojo goodCart) {
+		if(StringUtils.isNotBlank(key)) {
+			Set<Object> hashkeys = redisTemplate.opsForHash().keys(key);
+			List list=new ArrayList();
+			if(hashkeys.size()>0) {
+				Iterator<Object> iterator = hashkeys.iterator();
+				while(iterator.hasNext()) {
+					String hashkey=(String)iterator.next();
+					redisTemplate.expire(hashkey, -1, TimeUnit.SECONDS);
+					list.add(goodCart);
+					break;
+				}
+			}else {
+				list.add(goodCart);
+			}
+			if(list.size()>0) {
+				redisTemplate.opsForHash().put(key, "goodsinfosAfter", list);
+			}
+			return 1;
+		}else {
+			return 0;//您还未登录
 		}
-		redisTemplate.opsForHash().put(key, "goodsinfosAfter", goodsinfosAfter);
 
 	}
 	

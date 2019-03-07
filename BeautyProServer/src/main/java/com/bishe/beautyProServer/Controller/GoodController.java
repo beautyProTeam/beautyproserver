@@ -43,4 +43,10 @@ public class GoodController {
 			return map1;
 		}
 		
+		@GetMapping("/good/condition")
+		@ResponseBody
+		public List<GoodPojo> goods(@RequestParam Map map){
+			return goodService.goods(map);
+		}
+		
 }

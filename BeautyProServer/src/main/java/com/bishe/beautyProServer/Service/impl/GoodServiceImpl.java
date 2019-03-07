@@ -23,5 +23,9 @@ public class GoodServiceImpl implements GoodService {
 	public long countGoods(Map map) {
 		return goodDao.countGoods(map);
 	}
+	@Override
+	public List<GoodPojo> goods(Map map) {
+		return goodDao.goods(map);
+	}
 
 }
